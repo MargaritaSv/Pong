@@ -30,11 +30,15 @@ public class Pong implements ActionListener {
         jframe.setVisible(true);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.add(renderer);
+
+        start();
+
+        timer.start();
     }
 
     public void start() {
-        player1 = new Paddle(1);
-        player2 = new Paddle(2);
+        player1 = new Paddle(this,1);
+        player2 = new Paddle(this,2);
     }
 
     public void update() {
@@ -43,15 +47,17 @@ public class Pong implements ActionListener {
 
     public void render(Graphics g) {
 
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0,width,height);
         player1.render(g);
         player2.render(g);
     }
-
+/*
     public static void main(String[] args) {
 
         pong = new Pong();
     }
-
+*/
     @Override
     public void actionPerformed(ActionEvent e) {
         update();
