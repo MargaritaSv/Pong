@@ -11,9 +11,9 @@ public class Paddle {
 
     public int score;
 
-    int x, y, width = 100, height = 500;
+    int x, y, width = 50, height = 250;
 
-    public Paddle(Pong pong,int paddleNumber) {
+    public Paddle(Pong pong, int paddleNumber) {
 
         this.paddleNumber = paddleNumber;
 
@@ -28,5 +28,23 @@ public class Paddle {
     public void render(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(x, y, width, height);
+    }
+
+    public void move(boolean up) {
+
+        int speed = 15;
+        if (up) {
+            if (y - speed > 0) {
+                y -= speed;
+            } else {
+                y = 0;
+            }
+        } else {
+            if (y + height + speed < Pong.pong.height) {
+                y += speed;
+            } else {
+                y = Pong.pong.height - height-15;
+            }
+        }
     }
 }

@@ -40,12 +40,13 @@ public class Pong implements ActionListener, KeyListener {
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.add(renderer);
         jframe.addKeyListener(this);
-        start();
+     //   start();
 
         timer.start();
     }
 
     public void start() {
+        gameStatus =2;
         player1 = new Paddle(this, 1);
         player2 = new Paddle(this, 2);
 
@@ -54,7 +55,6 @@ public class Pong implements ActionListener, KeyListener {
     }
 
     public void update() {
-        //    /*
         if (w) {
             player1.move(true); //up
         } else if (s) {
@@ -67,6 +67,7 @@ public class Pong implements ActionListener, KeyListener {
             player2.move(false);
         }
 
+        ball.update(player1,player2);
     }
 
     public void render(Graphics2D g) {
@@ -77,10 +78,10 @@ public class Pong implements ActionListener, KeyListener {
 
         if (gameStatus == 0) {
             g.setColor(Color.WHITE);
-            g.setFont(new Font("Ariel", 1, 10));
+            g.setFont(new Font("Ariel", 1, 27));
             g.drawString("Pong", width / 2 - 75, 10);
 
-            g.setFont(new Font("Ariel", 1, 30));
+            g.setFont(new Font("Ariel", 1, 50));
             g.drawString("Press space to Play", width / 2 - 150, height / 2 - 50);
             g.drawString("Press shift to Play with Bot", width / 2 - 200, height / 2 - 25);
 
@@ -133,12 +134,12 @@ public class Pong implements ActionListener, KeyListener {
             down = true;
             System.out.println("down");
 
-        } else if (id == KeyEvent.VK_SPACE && gameStatus == 0) {
+        } else if (id == KeyEvent.VK_SHIFT && gameStatus == 0) {
             bot = true;
-            gameStatus = 2;
+            start();
         } else if (id == KeyEvent.VK_SPACE) {
             if (gameStatus == 0) {
-                gameStatus = 2;
+                start();
                 bot = false;
             } else if (gameStatus == 1) {
                 gameStatus = 2;

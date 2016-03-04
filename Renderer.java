@@ -14,6 +14,6 @@ public class Renderer extends JPanel {
 
         super.paintComponent(g);
 
-        Pong.pong.render(g);
+        Pong.pong.render((Graphics2D)g);
     }
 }
